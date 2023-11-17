@@ -1,0 +1,13 @@
+section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.left{
+    border: solid black;
+    width: 25%;
+}
+.right{
+    border: solid black;
+    width: 50%;
+}

@@ -1,0 +1,15 @@
+header{
+    padding: 0px;
+    height: 50px;
+    width: 100%;
+    border: solid black;
+    display: flex;
+    align-items: center;
+    gap:50px;
+}
+
+.icon{
+    /* height: 40px; */
+    margin-left: 15px;
+    font-size: 30px;
+}
