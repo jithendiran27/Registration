@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { StepsDirective } from '../steps.directive';
 import { DetailsDirective } from '../details.directive';
 import { Step1Component } from '../step-1/step-1.component';
@@ -10,6 +10,8 @@ import { Detail3Component } from '../detail-3/detail-3.component';
 import { Detail4Component } from '../detail-4/detail-4.component';
 import { Detail5Component } from '../detail-5/detail-5.component';
 import { Step1 } from '../step1';
+import { DataService } from '../data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -31,7 +33,7 @@ export class MainComponent {
     Step2Component,
     Step3Component,
   ];
-  public currentComponent = null;
+  // public currentComponent = null;
 
   public detailComponents = [
     Detail1Component,
@@ -40,16 +42,21 @@ export class MainComponent {
     Detail4Component,
     Detail5Component,
   ];
-  public currentDetailComponent = null;
+  // public currentDetailComponent = null;
 
-  constructor() {}
+  constructor(private dataService:DataService) {}
 
   
 
+  // @Input() detail1:Step1[];
+
   public i = -1;
   public j = -1;
-
+  languages = []
+//  detail1event: boolean=false;
   public next(): void {
+// this.detail1event=true
+
     if (
       this.i <= this.components.length &&
       this.j <= this.detailComponents.length
@@ -59,12 +66,24 @@ export class MainComponent {
       this.stepsComponent();
       this.detailComponent();
 
-      console.log(this.i);
+      // console.log(this.detail1.name);
       console.log(this.j);
     } else {
     }
   }
+//   shit(Event:any){
+// console.log(Event.target)
+//   }
 
+ngOnInit() {
+
+  this.sub = this.dataService.send_data.subscribe(
+    data => {
+      console.log(data)
+      this.languages = data
+    }
+  )
+}
   stepsComponent() {
     const currentComponent = this.components[this.i];
 
