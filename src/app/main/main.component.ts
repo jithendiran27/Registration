@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { StepsDirective } from '../steps.directive';
 import { DetailsDirective } from '../details.directive';
 import { Step1Component } from '../step-1/step-1.component';
@@ -18,7 +18,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
   @ViewChild(StepsDirective)
   appSteps!: StepsDirective;
   @ViewChild(DetailsDirective)
@@ -37,32 +37,31 @@ export class MainComponent {
 
   public detailComponents = [
     Detail1Component,
-    Detail2Component,
-    Detail3Component,
-    Detail4Component,
-    Detail5Component,
+    // Detail2Component,
+    // Detail3Component,
+    // Detail4Component,
+    // Detail5Component,
   ];
+
+  // public detailComponents = [];
+
   // public currentDetailComponent = null;
 
-  constructor(private dataService:DataService) {}
+  constructor(private dataService: DataService) {}
 
-  
-
-  // @Input() detail1:Step1[];
-
-  public i = -1;
-  public j = -1;
-  languages = []
-//  detail1event: boolean=false;
+  public i = 0;
+  public j = 0;
+  details: any = [];
+  currentDComponent: any = [];
+  sub!: Subscription;
   public next(): void {
-// this.detail1event=true
-
     if (
       this.i <= this.components.length &&
       this.j <= this.detailComponents.length
     ) {
       this.i += 1;
       this.j += 1;
+
       this.stepsComponent();
       this.detailComponent();
 
@@ -71,19 +70,13 @@ export class MainComponent {
     } else {
     }
   }
-//   shit(Event:any){
-// console.log(Event.target)
-//   }
 
-ngOnInit() {
+  ngOnInit() {
+    this.getDetails();
+    // this.stepsComponent();
+    // this.detailComponent();
+  }
 
-  this.sub = this.dataService.send_data.subscribe(
-    data => {
-      console.log(data)
-      this.languages = data
-    }
-  )
-}
   stepsComponent() {
     const currentComponent = this.components[this.i];
 
@@ -94,10 +87,21 @@ ngOnInit() {
 
   detailComponent() {
     const currentDetailComponent = this.detailComponents[this.j];
+    // const currentDetailComponent = this.details[0].component[0];
+    // const currentDetailComponent = this.currentDComponent;
 
     let viewDetailContainerRef = this.appDetails.viewContainerRef;
     viewDetailContainerRef.clear();
 
     viewDetailContainerRef.createComponent(currentDetailComponent);
+  }
+
+  getDetails() {
+    this.sub = this.dataService.send_data.subscribe((data) => {
+      console.log(data[0].name);
+      console.log(data[0].component[0]);
+      this.details = data;
+      this.detailComponents.push(this.details[0].component[0]);
+    });
   }
 }
