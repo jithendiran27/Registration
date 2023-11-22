@@ -24,13 +24,6 @@ export class MainComponent implements OnInit {
   @ViewChild(DetailsDirective)
   appDetails!: DetailsDirective;
 
-  public detailComponents = [
-    Detail1Component,
-    Detail2Component,
-    Detail3Component,
-    Detail4Component,
-    Detail5Component,
-  ];
   // detail: any = [];
   receivedData!: string;
 
@@ -40,7 +33,7 @@ export class MainComponent implements OnInit {
   currentDComponent: any = [];
   sub!: Subscription;
   public next(): void {
-    if (this.i <= this.detailComponents.length) {
+    if (this.i <= this.details.length) {
       this.i += 1;
       this.detailComponent(
         this.details[this.i].component,

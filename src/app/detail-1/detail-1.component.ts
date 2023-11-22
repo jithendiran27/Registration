@@ -22,6 +22,6 @@ export class Detail1Component implements OnInit {
   }
 
   sendData() {
-    this.output.next('Sent data from Tab1');
+    this.output.next('Sent data from Detail1');
   }
 }

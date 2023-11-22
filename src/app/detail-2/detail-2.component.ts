@@ -20,6 +20,6 @@ export class Detail2Component {
   }
 
   sendData() {
-    this.output.next('Sent data from Tab2');
+    this.output.next('Sent data from Detail2');
   }
 }
