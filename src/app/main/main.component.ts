@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
 })
-export class MainComponent implements OnInit {
+export class MainComponent  {
   @ViewChild(DetailsDirective)
   appDetails!: DetailsDirective;
 
