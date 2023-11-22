@@ -4,10 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
-import { Step1Component } from './step-1/step-1.component';
-import { Step2Component } from './step-2/step-2.component';
-import { Step3Component } from './step-3/step-3.component';
-import { StepsDirective } from './steps.directive';
 import { DetailsDirective } from './details.directive';
 import { Detail1Component } from './detail-1/detail-1.component';
 import { Detail2Component } from './detail-2/detail-2.component';
@@ -20,23 +16,16 @@ import { MainComponent } from './main/main.component';
   declarations: [
     AppComponent,
     ToolBarComponent,
-    Step1Component,
-    Step2Component,
-    Step3Component,
-    StepsDirective,
     DetailsDirective,
     Detail1Component,
     Detail2Component,
     Detail3Component,
     Detail4Component,
     Detail5Component,
-    MainComponent
+    MainComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

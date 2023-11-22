@@ -15,8 +15,8 @@ export class DataService {
 
   constructor() {}
 
-  // changeBookList(bookList: any) {
-  //   this.bookList.next(bookList);
+  // send_data(bookList: any) {
+  //   this.bookList(bookList);
   // }
 
   // changeName(name: any) {

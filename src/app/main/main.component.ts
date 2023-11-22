@@ -1,9 +1,11 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { StepsDirective } from '../steps.directive';
+import {
+  Component,
+  ComponentRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { DetailsDirective } from '../details.directive';
-import { Step1Component } from '../step-1/step-1.component';
-import { Step2Component } from '../step-2/step-2.component';
-import { Step3Component } from '../step-3/step-3.component';
 import { Detail1Component } from '../detail-1/detail-1.component';
 import { Detail2Component } from '../detail-2/detail-2.component';
 import { Detail3Component } from '../detail-3/detail-3.component';
@@ -19,89 +21,71 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit {
-  @ViewChild(StepsDirective)
-  appSteps!: StepsDirective;
   @ViewChild(DetailsDirective)
   appDetails!: DetailsDirective;
 
-  public components = [
-    Step1Component,
-    Step1Component,
-    Step1Component,
-    Step1Component,
-    Step1Component,
-    Step2Component,
-    Step3Component,
-  ];
-  // public currentComponent = null;
-
   public detailComponents = [
     Detail1Component,
-    // Detail2Component,
-    // Detail3Component,
-    // Detail4Component,
-    // Detail5Component,
+    Detail2Component,
+    Detail3Component,
+    Detail4Component,
+    Detail5Component,
   ];
-
-  // public detailComponents = [];
-
-  // public currentDetailComponent = null;
+  // detail: any = [];
+  receivedData!: string;
 
   constructor(private dataService: DataService) {}
 
-  public i = 0;
-  public j = 0;
-  details: any = [];
+  public i = -1;
   currentDComponent: any = [];
   sub!: Subscription;
   public next(): void {
-    if (
-      this.i <= this.components.length &&
-      this.j <= this.detailComponents.length
-    ) {
+    if (this.i <= this.detailComponents.length) {
       this.i += 1;
-      this.j += 1;
-
-      this.stepsComponent();
-      this.detailComponent();
-
-      // console.log(this.detail1.name);
-      console.log(this.j);
+      this.detailComponent(
+        this.details[this.i].component,
+        this.details[this.i].name
+      );
     } else {
     }
   }
 
-  ngOnInit() {
-    this.getDetails();
-    // this.stepsComponent();
-    // this.detailComponent();
-  }
+  ngOnInit() {}
 
-  stepsComponent() {
-    const currentComponent = this.components[this.i];
+  details: Step1[] = [
+    {
+      name: 'Personal Details',
+      isCompleted: false,
+      isProgress: true,
+      component: Detail1Component,
+      data: [],
+    },
+    {
+      name: 'Address Proof',
+      isCompleted: false,
+      isProgress: true,
+      component: Detail2Component,
+      data: [],
+    },
+    {
+      name: 'Payment',
+      isCompleted: false,
+      isProgress: true,
+      component: Detail3Component,
+      data: [],
+    },
+  ];
 
-    let viewContainerRef = this.appSteps.viewContainerRef;
-    viewContainerRef.clear();
-    viewContainerRef.createComponent(currentComponent);
-  }
-
-  detailComponent() {
-    const currentDetailComponent = this.detailComponents[this.j];
-    // const currentDetailComponent = this.details[0].component[0];
-    // const currentDetailComponent = this.currentDComponent;
-
+  detailComponent(currentComponent: any, data: string) {
+    this.receivedData = '';
     let viewDetailContainerRef = this.appDetails.viewContainerRef;
     viewDetailContainerRef.clear();
-
-    viewDetailContainerRef.createComponent(currentDetailComponent);
-  }
-
-  getDetails() {
-    this.sub = this.dataService.send_data.subscribe((data) => {
-      console.log(data[0].name);
-      console.log(data[0].component[0]);
-      this.details = data;
-      this.detailComponents.push(this.details[0].component[0]);
+    let componentRef: ComponentRef<any> =
+      viewDetailContainerRef.createComponent(currentComponent);
+    componentRef.instance.data = data;
+    componentRef.instance.output.subscribe((results: string) => {
+      this.receivedData = results;
+      console.log(this.receivedData);
     });
   }
 }

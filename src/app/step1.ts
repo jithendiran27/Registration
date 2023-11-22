@@ -3,4 +3,5 @@ export interface Step1 {
   isCompleted: boolean;
   isProgress: boolean;
   component: any;
+  data:any[];
 }
