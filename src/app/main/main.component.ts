@@ -1,19 +1,10 @@
-import {
-  Component,
-  ComponentRef,
-  Input,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ComponentRef, OnInit, ViewChild } from '@angular/core';
 import { DetailsDirective } from '../details.directive';
 import { Detail1Component } from '../detail-1/detail-1.component';
 import { Detail2Component } from '../detail-2/detail-2.component';
 import { Detail3Component } from '../detail-3/detail-3.component';
-import { Detail4Component } from '../detail-4/detail-4.component';
-import { Detail5Component } from '../detail-5/detail-5.component';
-import { Step1 } from '../step1';
-import { DataService } from '../data.service';
 import { Subscription } from 'rxjs';
+import { Obj } from '../obj';
 
 @Component({
   selector: 'app-main',
@@ -24,12 +15,13 @@ export class MainComponent implements OnInit {
   @ViewChild(DetailsDirective)
   appDetails!: DetailsDirective;
 
-  // detail: any = [];
-  receivedData!: string;
+  receivedData!: any;
+  message: any;
+  messages: any;
 
-  constructor(private dataService: DataService) {}
+  constructor() {}
 
-  public i = -1;
+  public i = 0;
   currentDComponent: any = [];
   sub!: Subscription;
   public next(): void {
@@ -37,7 +29,7 @@ export class MainComponent implements OnInit {
       this.i += 1;
       this.detailComponent(
         this.details[this.i].component,
-        this.details[this.i].name
+        this.details[this.i]
       );
     } else {
     }
@@ -45,7 +37,11 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {}
 
-  details: Step1[] = [
+  ngAfterViewInit() {
+    this.detailComponent(this.details[this.i].component, this.details[this.i]);
+  }
+
+  details: Obj[] = [
     {
       name: 'Personal Details',
       isCompleted: false,
@@ -69,16 +65,22 @@ export class MainComponent implements OnInit {
     },
   ];
 
-  detailComponent(currentComponent: any, data: string) {
-    this.receivedData = '';
+  detailComponent(currentComponent: any, data: any) {
+    // this.receivedData = '';
     let viewDetailContainerRef = this.appDetails.viewContainerRef;
     viewDetailContainerRef.clear();
     let componentRef: ComponentRef<any> =
       viewDetailContainerRef.createComponent(currentComponent);
     componentRef.instance.data = data;
-    componentRef.instance.output.subscribe((results: string) => {
+    componentRef.instance.output.subscribe((results: any) => {
       this.receivedData = results;
       console.log(this.receivedData);
     });
+  }
+
+  receivedMessage($event: any) {
+    this.message = $event;
+    this.messages = this.message[0].name;
+    console.log(this.message);
   }
 }

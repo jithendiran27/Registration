@@ -1,10 +1,10 @@
 import { Directive, EventEmitter, Input, Output, ViewContainerRef } from '@angular/core';
+import { IBtnDetail } from './ibtn-detail';
 
 @Directive({
   selector: '[appDetails]',
 })
 export class DetailsDirective {
-  // @Input() nextclicking:any
   @Output() btnClick = new EventEmitter<IBtnDetail>();
   constructor(public viewContainerRef: ViewContainerRef) {}
   
@@ -13,8 +13,3 @@ export class DetailsDirective {
   }
 }
 
-export interface IBtnDetail {
-  name: string;
-  key: string;
-  data: any;
-}

@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Step1 } from '../step1';
-import { DataService } from '../data.service';
 import { Subject } from 'rxjs';
-import { IBtnDetail } from '../details.directive';
+import { IBtnDetail } from '../ibtn-detail';
+import { MainComponent } from '../main/main.component';
 
 @Component({
   selector: 'app-detail-1',
@@ -11,17 +10,36 @@ import { IBtnDetail } from '../details.directive';
 })
 export class Detail1Component implements OnInit {
   @Input('data')
-  data!: string;
-  @Output() btnClick = new EventEmitter<IBtnDetail>();
-  private output = new Subject<string>();
+  data!: any;
+  @Output() btnClick = new EventEmitter<any>();
+  private output = new Subject<any>();
 
-  constructor() {}
+  constructor(private mainComp: MainComponent) {}
+
+  btnDetail1: IBtnDetail[] = [
+    {
+      name: 'D1',
+      key: 'nxt',
+      data: [],
+    },
+  ];
 
   ngOnInit() {
-    this.sendData();
+    this.data.isCompleted = true;
   }
 
   sendData() {
-    this.output.next('Sent data from Detail1');
+    this.output.next(this.btnDetail1);
+  }
+
+  next() {
+    if (this.data.isCompleted == true) {
+      this.mainComp.next();
+      this.sendData();
+      this.btnClick.emit(this.btnDetail1);
+      console.log(this.btnDetail1);
+    } else {
+      alert('please fill');
+    }
   }
 }
