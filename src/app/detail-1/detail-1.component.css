@@ -1,4 +1,9 @@
 button{
     position: absolute;
-    bottom: 50%;
+    bottom: 20%;
+}
+.DetailForm{
+    display: flex;
+    flex-direction: column;
+    gap: 30px
 }

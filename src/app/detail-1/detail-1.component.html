@@ -1,4 +1,43 @@
 <h1>{{ data.name }}</h1>
-<input type="email" placeholder="Enter your Email id" />
-<input type="password" placeholder="Create a Password" />
-<button (click)="next()">Next</button>
+<section class="inputs">
+  <form [formGroup]="Detail1Form" (ngSubmit)="next()" class="DetailForm">
+    <div class="name">
+      <label>Name</label>
+      <input type="text" formControlName="name" />
+
+      <span *ngIf="name?.touched && name?.hasError('required')">
+        Please fill this field
+      </span>
+    </div>
+
+    <div class="age">
+      <label>Age</label>
+      <input type="number" formControlName="age" />
+
+      <span *ngIf="age?.touched && age?.hasError('required')">
+        Please fill this field
+      </span>
+    </div>
+
+    <div class="radio" *ngFor="let gender of genders">
+      <label>
+        <input type="radio" [value]="gender" formControlName="gender" />{{
+          gender
+        }}
+      </label>
+    </div>
+
+    <div class="email">
+      <label>Email id</label>
+      <input type="email" formControlName="email" placeholder="" />
+
+      <span *ngIf="email?.touched && email?.hasError('required')">
+        Please fill this field
+      </span>
+    </div>
+
+    <div class="button">
+      <button type="submit">Next</button>
+    </div>
+  </form>
+</section>

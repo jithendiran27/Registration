@@ -8,9 +8,8 @@ import { DetailsDirective } from './details.directive';
 import { Detail1Component } from './detail-1/detail-1.component';
 import { Detail2Component } from './detail-2/detail-2.component';
 import { Detail3Component } from './detail-3/detail-3.component';
-import { Detail4Component } from './detail-4/detail-4.component';
-import { Detail5Component } from './detail-5/detail-5.component';
 import { MainComponent } from './main/main.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,11 +19,9 @@ import { MainComponent } from './main/main.component';
     Detail1Component,
     Detail2Component,
     Detail3Component,
-    Detail4Component,
-    Detail5Component,
     MainComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

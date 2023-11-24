@@ -50,14 +50,14 @@ export class MainComponent implements OnInit {
       data: [],
     },
     {
-      name: 'Address Proof',
+      name: 'Delivery Details',
       isCompleted: false,
       isProgress: true,
       component: Detail2Component,
       data: [],
     },
     {
-      name: 'Payment',
+      name: 'Payment Details',
       isCompleted: false,
       isProgress: true,
       component: Detail3Component,
