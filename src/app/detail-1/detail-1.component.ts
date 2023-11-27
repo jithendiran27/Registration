@@ -36,8 +36,8 @@ export class Detail1Component implements OnInit {
 
   ngOnInit() {
     // this.data.isCompleted = true;
-    console.log(this.receivedData[0].data);
-    this.Detail1Form.patchValue(this.receivedData[0].data);
+    // console.log(this.receivedData);
+    this.Detail1Form.patchValue(this.receivedData);
   }
 
   get name() {
@@ -60,9 +60,9 @@ export class Detail1Component implements OnInit {
     this.btnDetail1[0].data = this.Detail1Form.value;
     if (this.Detail1Form.valid) {
       this.mainComp.next();
-      this.output.next(this.btnDetail1);
+      this.output.next(this.btnDetail1[0].data);
       // this.btnClick.emit(this.Detail1Data);
-      console.log(this.receivedData);
+      // console.log(this.receivedData);
     } else {
       alert('please fill all the details');
     }

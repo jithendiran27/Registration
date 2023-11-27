@@ -10,6 +10,7 @@ import { Detail2Component } from './detail-2/detail-2.component';
 import { Detail3Component } from './detail-3/detail-3.component';
 import { MainComponent } from './main/main.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     Detail2Component,
     Detail3Component,
     MainComponent,
+    ThankYouComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

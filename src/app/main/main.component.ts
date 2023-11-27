@@ -5,6 +5,7 @@ import { Detail2Component } from '../detail-2/detail-2.component';
 import { Detail3Component } from '../detail-3/detail-3.component';
 import { Subscription } from 'rxjs';
 import { Obj } from '../obj';
+import { ThankYouComponent } from '../thank-you/thank-you.component';
 
 @Component({
   selector: 'app-main',
@@ -70,6 +71,13 @@ export class MainComponent implements OnInit {
       component: Detail3Component,
       data: [],
     },
+    {
+      name: 'Submitted',
+      isCompleted: false,
+      isProgress: true,
+      component: ThankYouComponent,
+      data: [],
+    },
   ];
 
   detailComponent(currentComponent: any, data: any) {
@@ -78,9 +86,10 @@ export class MainComponent implements OnInit {
     let componentRef: ComponentRef<any> =
       viewDetailContainerRef.createComponent(currentComponent);
     componentRef.instance.data = data;
+    componentRef.instance.receivedData = this.details[this.i].data;
     componentRef.instance.output.subscribe((results: any) => {
-      this.receivedData.push(results);
-      console.log(this.receivedData);
+      this.details[this.i - 1].data = results;
+      console.log(this.details);
     });
   }
 
@@ -90,8 +99,8 @@ export class MainComponent implements OnInit {
     let componentRef: ComponentRef<any> =
       viewDetailContainerRef.createComponent(currentComponent);
     componentRef.instance.data = data;
-    componentRef.instance.receivedData = this.receivedData[this.i];
-    console.log(this.receivedData[this.i]);
+    componentRef.instance.receivedData = this.details[this.i].data;
+    console.log(this.details[this.i].data);
   }
 
   receivedMessage($event: any) {

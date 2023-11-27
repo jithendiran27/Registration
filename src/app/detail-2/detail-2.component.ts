@@ -32,8 +32,8 @@ export class Detail2Component {
   constructor(private mainComp: MainComponent, private fb: FormBuilder) {}
 
   ngOnInit() {
-    console.log(this.receivedData[0].data);
-    this.Detail2Form.patchValue(this.receivedData[0].data);
+    // console.log(this.receivedData);
+    this.Detail2Form.patchValue(this.receivedData);
   }
 
   get address() {
@@ -44,7 +44,7 @@ export class Detail2Component {
     this.btnDetail2[0].data = this.Detail2Form.value;
     if (this.Detail2Form.valid) {
       this.mainComp.next();
-      this.output.next(this.btnDetail2);
+      this.output.next(this.btnDetail2[0].data);
       // this.btnClick.emit(this.Detail1Data);
       // console.log(this.Detail1Data);
     } else {

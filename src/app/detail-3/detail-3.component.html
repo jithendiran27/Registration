@@ -1,6 +1,6 @@
 <h1>{{ data.name }}</h1>
 <section class="inputs">
-  <form [formGroup]="Detail3Form" (ngSubmit)="next()" class="DetailForm">
+  <form [formGroup]="Detail3Form" (ngSubmit)="submit()" class="DetailForm">
     <div class="cardNo">
       <label>Card Number</label>
       <input type="number" formControlName="cardNo" />
@@ -8,8 +8,8 @@
         Please fill this field
       </span>
     </div>
-    <div class="button">
-      <button type="submit">Next</button>
+    <div class="nextButton">
+      <button type="submit">Submit</button>
     </div>
   </form>
   <div class="backButton">

@@ -12,6 +12,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class Detail3Component {
   @Input('data')
   data!: any;
+  @Input('receivedData')
+  receivedData!: any;
   @Output() btnClick = new EventEmitter<any>();
   private output = new Subject<any>();
 
@@ -29,16 +31,21 @@ export class Detail3Component {
 
   constructor(private mainComp: MainComponent, private fb: FormBuilder) {}
 
+  ngOnInit() {
+    // console.log(this.receivedData);
+    this.Detail3Form.patchValue(this.receivedData);
+  }
+
   get cardNo() {
     return this.Detail3Form?.get('cardNo');
   }
 
-  next() {
+  submit() {
     this.btnDetail3[0].data = this.Detail3Form.value;
     if (this.Detail3Form.valid) {
       this.mainComp.next();
-      // this.sendData();
-      this.output.next(this.btnDetail3);
+      this.output.next(this.btnDetail3[0].data);
+      // console.log(this.mainComp.details);
       // this.btnClick.emit(this.Detail1Data);
       // console.log(this.Detail1Data);
     } else {
