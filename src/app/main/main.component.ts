@@ -15,7 +15,7 @@ export class MainComponent implements OnInit {
   @ViewChild(DetailsDirective)
   appDetails!: DetailsDirective;
 
-  receivedData!: any;
+  receivedData: any[] = [];
   message: any;
   messages: any;
 
@@ -31,8 +31,15 @@ export class MainComponent implements OnInit {
         this.details[this.i].component,
         this.details[this.i]
       );
-    } else {
     }
+  }
+
+  public back(): void {
+    this.i -= 1;
+    this.backDetailComponent(
+      this.details[this.i].component,
+      this.details[this.i]
+    );
   }
 
   ngOnInit() {}
@@ -66,16 +73,25 @@ export class MainComponent implements OnInit {
   ];
 
   detailComponent(currentComponent: any, data: any) {
-    // this.receivedData = '';
     let viewDetailContainerRef = this.appDetails.viewContainerRef;
     viewDetailContainerRef.clear();
     let componentRef: ComponentRef<any> =
       viewDetailContainerRef.createComponent(currentComponent);
     componentRef.instance.data = data;
     componentRef.instance.output.subscribe((results: any) => {
-      this.receivedData = results;
+      this.receivedData.push(results);
       console.log(this.receivedData);
     });
+  }
+
+  backDetailComponent(currentComponent: any, data: any) {
+    let viewDetailContainerRef = this.appDetails.viewContainerRef;
+    viewDetailContainerRef.clear();
+    let componentRef: ComponentRef<any> =
+      viewDetailContainerRef.createComponent(currentComponent);
+    componentRef.instance.data = data;
+    componentRef.instance.receivedData = this.receivedData[this.i];
+    console.log(this.receivedData[this.i]);
   }
 
   receivedMessage($event: any) {

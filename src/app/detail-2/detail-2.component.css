@@ -1,4 +1,15 @@
-button{
+.nextButton{
     position: absolute;
-    bottom: 50%;
+    bottom: 20%;
+    right: 10%;
+}
+.backButton{
+    position: absolute;
+    bottom: 20%;
+    right: 30%;
+}
+.DetailForm{
+    display: flex;
+    flex-direction: column;
+    gap: 30px
 }

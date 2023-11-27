@@ -12,6 +12,8 @@ import { MainComponent } from '../main/main.component';
 export class Detail1Component implements OnInit {
   @Input('data')
   data!: any;
+  @Input('receivedData')
+  receivedData!: any;
   @Output() btnClick = new EventEmitter<any>();
   private output = new Subject<any>();
   genders = ['male', 'female'];
@@ -33,7 +35,9 @@ export class Detail1Component implements OnInit {
   constructor(private mainComp: MainComponent, private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.data.isCompleted = true;
+    // this.data.isCompleted = true;
+    console.log(this.receivedData[0].data);
+    this.Detail1Form.patchValue(this.receivedData[0].data);
   }
 
   get name() {
@@ -52,20 +56,15 @@ export class Detail1Component implements OnInit {
     return this.Detail1Form?.get('gender');
   }
 
-  // sendData() {
-  // this.output.next(this.btnDetail1);
-  // }
-
   next() {
-    const Detail1Data = this.Detail1Form.value;
+    this.btnDetail1[0].data = this.Detail1Form.value;
     if (this.Detail1Form.valid) {
       this.mainComp.next();
-      // this.sendData();
-      this.output.next(Detail1Data);
+      this.output.next(this.btnDetail1);
       // this.btnClick.emit(this.Detail1Data);
-      // console.log(this.Detail1Data);
+      console.log(this.receivedData);
     } else {
-      alert('please fill');
+      alert('please fill all the details');
     }
   }
 }

@@ -1,22 +1,32 @@
 <h1>{{ data.name }}</h1>
 <section class="inputs">
   <form [formGroup]="Detail2Form" (ngSubmit)="next()" class="DetailForm">
-    <div class="name">
+    <!-- <div class="name">
       <label>name</label>
       <input type="text" formControlName="name" />
 
       <span *ngIf="name?.touched && name?.hasError('required')">
         Please fill this field
       </span>
-    </div>
-    <textarea name="address" formControlName="address">
+    </div> -->
+    <div class="address">
+      <div class="addressLabel">
+        <label>Address</label>
+      </div>
+      <div class="addressTextArea">
+        <textarea name="address" formControlName="address">
 Enter text here...</textarea
-    >
-    <span *ngIf="address?.touched && address?.hasError('required')">
-      Please fill this field
-    </span>
-    <div class="button">
+        >
+      </div>
+      <span *ngIf="address?.touched && address?.hasError('required')">
+        Please fill this field
+      </span>
+    </div>
+    <div class="nextButton">
       <button type="submit">Next</button>
     </div>
   </form>
+  <div class="backButton">
+    <button (click)="back()">Back</button>
+  </div>
 </section>

@@ -11,7 +11,7 @@ export class DataService {
   // currentBookList = this.bookList.asObservable();
   // send_data = new Subject<any>();
 
-  @Output() send_data = new EventEmitter<any>();
+  // @Output() send_data = new EventEmitter<any>();
 
   constructor() {}
 

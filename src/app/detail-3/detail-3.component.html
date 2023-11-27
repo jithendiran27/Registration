@@ -1,4 +1,18 @@
 <h1>{{ data.name }}</h1>
-<input type="email" placeholder="Enter your Email id" />
-<input type="password" placeholder="Create a Password" />
-<button (click)="submit()">Submit</button>
+<section class="inputs">
+  <form [formGroup]="Detail3Form" (ngSubmit)="next()" class="DetailForm">
+    <div class="cardNo">
+      <label>Card Number</label>
+      <input type="number" formControlName="cardNo" />
+      <span *ngIf="cardNo?.touched && cardNo?.hasError('required')">
+        Please fill this field
+      </span>
+    </div>
+    <div class="button">
+      <button type="submit">Next</button>
+    </div>
+  </form>
+  <div class="backButton">
+    <button (click)="back()">Back</button>
+  </div>
+</section>

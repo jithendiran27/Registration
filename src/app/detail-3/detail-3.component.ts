@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MainComponent } from '../main/main.component';
 import { IBtnDetail } from '../ibtn-detail';
 import { Subject } from 'rxjs';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-detail-3',
@@ -22,24 +23,30 @@ export class Detail3Component {
     },
   ];
 
-  constructor(private mainComp: MainComponent) {}
+  Detail3Form = this.fb.group({
+    cardNo: ['', [Validators.required]],
+  });
 
-  ngOnInit() {
-    this.data.isCompleted = true;
+  constructor(private mainComp: MainComponent, private fb: FormBuilder) {}
+
+  get cardNo() {
+    return this.Detail3Form?.get('cardNo');
   }
 
-  sendData() {
-    this.output.next(this.btnDetail3);
-  }
-
-  submit() {
-    if (this.data.isCompleted == true) {
-      // this.mainComp.next();
-      this.sendData();
-      this.btnClick.emit(this.btnDetail3);
-      console.log(this.btnDetail3);
+  next() {
+    this.btnDetail3[0].data = this.Detail3Form.value;
+    if (this.Detail3Form.valid) {
+      this.mainComp.next();
+      // this.sendData();
+      this.output.next(this.btnDetail3);
+      // this.btnClick.emit(this.Detail1Data);
+      // console.log(this.Detail1Data);
     } else {
-      alert('please fill');
+      alert('please fill all the details');
     }
+  }
+
+  back() {
+    this.mainComp.back();
   }
 }
