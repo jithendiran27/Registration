@@ -1,8 +1,8 @@
 <section>
   <div class="left">
-    <h1 class="one" [class.active]="isActive == 0">Personal Details</h1>
-    <h1 class="two" [class.active]="isActive == 1">Delivery Details</h1>
-    <h1 class="three" [class.active]="isActive == 2">Payment Details</h1>
+    <h1 class="one" [class.active]="i === 0">{{ details[0].name }}</h1>
+    <h1 class="two" [class.active]="i === 1">{{ details[1].name }}</h1>
+    <h1 class="three" [class.active]="i === 2">{{ details[2].name }}</h1>
   </div>
   <div class="right">
     <ng-template appDetails (btnClick)="receivedMessage($event)"></ng-template>
