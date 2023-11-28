@@ -23,6 +23,7 @@ export class MainComponent implements OnInit {
   constructor() {}
 
   public i = 0;
+  public isActive = this.i;
   currentDComponent: any = [];
   sub!: Subscription;
   public next(): void {
@@ -43,7 +44,9 @@ export class MainComponent implements OnInit {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setColor();
+  }
 
   ngAfterViewInit() {
     this.detailComponent(this.details[this.i].component, this.details[this.i]);
@@ -81,6 +84,7 @@ export class MainComponent implements OnInit {
   ];
 
   detailComponent(currentComponent: any, data: any) {
+    this.setColor();
     let viewDetailContainerRef = this.appDetails.viewContainerRef;
     viewDetailContainerRef.clear();
     let componentRef: ComponentRef<any> =
@@ -94,6 +98,7 @@ export class MainComponent implements OnInit {
   }
 
   backDetailComponent(currentComponent: any, data: any) {
+    this.setColor();
     let viewDetailContainerRef = this.appDetails.viewContainerRef;
     viewDetailContainerRef.clear();
     let componentRef: ComponentRef<any> =
@@ -107,5 +112,21 @@ export class MainComponent implements OnInit {
     this.message = $event;
     this.messages = this.message[0].name;
     console.log(this.message);
+  }
+
+  setColor() {
+    const firstTag = document.getElementById('one');
+    const secondTag = document.getElementById('two');
+    const thirdTag = document.getElementById('three');
+
+    if (firstTag && this.i == 0) {
+      firstTag.style.color = 'red';
+    } else if (firstTag && this.i != 0) {
+      firstTag.style.color = 'black';
+    } else if (secondTag && this.i == 1) {
+      secondTag.style.color = 'red';
+    } else if (thirdTag && this.i == 2) {
+      thirdTag.style.color = 'red';
+    }
   }
 }

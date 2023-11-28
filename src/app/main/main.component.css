@@ -11,3 +11,25 @@ section{
     border: solid black;
     width: 50%;
 }
+
+.one{
+    color: black;
+}
+
+.one.active{
+    color: blue;
+}
+.two{
+    color: black;
+}
+
+.two.active{
+    color: blue;
+}
+.three{
+    color: black;
+}
+
+.three.active{
+    color: blue;
+}
