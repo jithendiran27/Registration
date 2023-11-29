@@ -14,7 +14,7 @@ export class Detail2Component {
   data!: any;
   @Input('receivedData')
   receivedData!: any;
-  @Output() btnClick = new EventEmitter<any>();
+  // @Output() btnClick = new EventEmitter<any>();
   private output = new Subject<any>();
 
   btnDetail2: IBtnDetail[] = [

@@ -17,15 +17,13 @@ export class MainComponent implements OnInit {
   appDetails!: DetailsDirective;
 
   receivedData: any[] = [];
-  message: any;
-  messages: any;
+  // message: any;
+  // messages: any;
 
   constructor() {}
 
   public i = 0;
-  public isActive = this.i;
-  currentDComponent: any = [];
-  sub!: Subscription;
+  public steps = this.i + 1;
   public next(): void {
     if (this.i <= this.details.length) {
       this.i += 1;
@@ -104,9 +102,9 @@ export class MainComponent implements OnInit {
     console.log(this.details[this.i].data);
   }
 
-  receivedMessage($event: any) {
-    this.message = $event;
-    this.messages = this.message[0].name;
-    console.log(this.message);
-  }
+  // receivedMessage($event: any) {
+  //   this.message = $event;
+  //   this.messages = this.message[0].name;
+  //   console.log(this.message);
+  // }
 }
