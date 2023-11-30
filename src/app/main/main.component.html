@@ -1,12 +1,12 @@
 <app-tool-bar [currentStep]="i"></app-tool-bar>
 <section>
   <div class="left">
-    <h1 class="one" [class.active]="i === 0">{{ details[0].name }}</h1>
+    <h1  class="one" [class.active]="i === 0">{{ details[0].name }}</h1>
     <h1 class="two" [class.active]="i === 1">{{ details[1].name }}</h1>
     <h1 class="three" [class.active]="i === 2">{{ details[2].name }}</h1>
   </div>
   <div class="right">
-    <ng-template appDetails></ng-template>
+    <ng-template appDetails (btnClick)="receivedMessage($event)"></ng-template>
   </div>
 </section>
 <!-- <button (click)="next()">Next</button> -->

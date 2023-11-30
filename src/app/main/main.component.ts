@@ -3,7 +3,6 @@ import { DetailsDirective } from '../details.directive';
 import { Detail1Component } from '../detail-1/detail-1.component';
 import { Detail2Component } from '../detail-2/detail-2.component';
 import { Detail3Component } from '../detail-3/detail-3.component';
-import { Subscription } from 'rxjs';
 import { Obj } from '../obj';
 import { ThankYouComponent } from '../thank-you/thank-you.component';
 
@@ -17,8 +16,8 @@ export class MainComponent implements OnInit {
   appDetails!: DetailsDirective;
 
   receivedData: any[] = [];
-  // message: any;
-  // messages: any;
+  message: any;
+  messages: any;
 
   constructor() {}
 
@@ -102,9 +101,9 @@ export class MainComponent implements OnInit {
     console.log(this.details[this.i].data);
   }
 
-  // receivedMessage($event: any) {
-  //   this.message = $event;
-  //   this.messages = this.message[0].name;
-  //   console.log(this.message);
-  // }
+  receivedMessage($event: any) {
+    this.message = $event;
+    this.messages = this.message[0].name;
+    console.log(this.message);
+  }
 }

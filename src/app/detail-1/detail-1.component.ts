@@ -14,7 +14,7 @@ export class Detail1Component implements OnInit {
   data!: any;
   @Input('receivedData')
   receivedData!: any;
-  // @Output() btnClick = new EventEmitter<any>();
+  @Output() btnClick = new EventEmitter<any>();
   private output = new Subject<any>();
   genders = ['male', 'female'];
 
@@ -61,7 +61,7 @@ export class Detail1Component implements OnInit {
     if (this.Detail1Form.valid) {
       this.mainComp.next();
       this.output.next(this.btnDetail1[0].data);
-      // this.btnClick.emit(this.Detail1Data);
+      // this.btnClick.emit(this.btnDetail1[0].data);
       // console.log(this.receivedData);
     } else {
       alert('please fill all the details');
