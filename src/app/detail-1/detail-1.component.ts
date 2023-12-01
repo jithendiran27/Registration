@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { IBtnDetail } from '../ibtn-detail';
 import { Validators, FormBuilder } from '@angular/forms';
 import { MainComponent } from '../main/main.component';
@@ -18,13 +18,13 @@ export class Detail1Component implements OnInit {
   private output = new Subject<any>();
   genders = ['male', 'female'];
 
-  btnDetail1: IBtnDetail[] = [
-    {
-      name: 'D1',
-      key: 'nxt',
-      data: [],
-    },
-  ];
+  // btnDetail1: IBtnDetail[] = [
+  //   {
+  //     name: 'D1',
+  //     key: 'nxt',
+  //     data: [],
+  //   },
+  // ];
   Detail1Form = this.fb.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required]],
@@ -57,10 +57,10 @@ export class Detail1Component implements OnInit {
   }
 
   next() {
-    this.btnDetail1[0].data = this.Detail1Form.value;
+    this.data.data = this.Detail1Form.value;
     if (this.Detail1Form.valid) {
       this.mainComp.next();
-      this.output.next(this.btnDetail1[0].data);
+      this.output.next(this.data.data);
       // this.btnClick.emit(this.btnDetail1[0].data);
       // console.log(this.receivedData);
     } else {

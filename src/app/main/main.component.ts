@@ -86,7 +86,7 @@ export class MainComponent implements OnInit {
     componentRef.instance.data = data;
     componentRef.instance.receivedData = this.details[this.i].data;
     componentRef.instance.output.subscribe((results: any) => {
-      this.details[this.i - 1].data = results;
+      results = this.details[this.i - 1].data;
       console.log(this.details);
     });
   }
@@ -98,6 +98,10 @@ export class MainComponent implements OnInit {
       viewDetailContainerRef.createComponent(currentComponent);
     componentRef.instance.data = data;
     componentRef.instance.receivedData = this.details[this.i].data;
+    componentRef.instance.output.subscribe((results: any) => {
+      results = this.details[this.i + 1].data;
+      console.log(this.details);
+    });
     console.log(this.details[this.i].data);
   }
 

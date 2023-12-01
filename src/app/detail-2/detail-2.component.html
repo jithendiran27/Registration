@@ -14,7 +14,11 @@
         <label>Address</label>
       </div>
       <div class="addressTextArea">
-        <textarea name="address" formControlName="address">
+        <textarea
+          name="address"
+          formControlName="address"
+          (input)="onChanges($event)"
+        >
 Enter text here...</textarea
         >
       </div>
